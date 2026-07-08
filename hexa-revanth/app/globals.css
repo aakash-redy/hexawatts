@@ -63,6 +63,166 @@ body {
    NEW ROADMAP STYLES
    ============================================ */
 
+/* ------------------------------------------
+   ROADMAP LAYOUT — THIS WAS MISSING
+   .roadmap-section / .roadmap-canvas-container
+   were referenced in RoadmapSection.jsx but
+   never defined anywhere, so the container
+   collapsed to near-zero height.
+   ------------------------------------------ */
+
+.roadmap-section {
+  position: relative;
+  width: 100%;
+  padding: 4rem 1.5rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.roadmap-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.roadmap-header-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: #FFC600;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.roadmap-header-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.roadmap-header-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.roadmap-canvas-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 70vh;
+  min-height: 500px;
+  margin-top: 2rem;
+}
+
+.roadmap-legend {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 220px;
+}
+
+.roadmap-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.roadmap-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: block;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.roadmap-legend-completed .roadmap-legend-dot {
+  background: #22c55e;
+}
+
+.roadmap-legend-current .roadmap-legend-dot {
+  background: #FFC600;
+}
+
+.roadmap-legend-locked .roadmap-legend-dot {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.roadmap-legend-active {
+  border-color: rgba(255, 198, 0, 0.4);
+}
+
+.roadmap-legend-phase {
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.roadmap-legend-name {
+  font-size: 0.85rem;
+  color: #ffffff;
+}
+
+.roadmap-loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
+.roadmap-loader-ring {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(255, 198, 0, 0.15);
+  border-top-color: #FFC600;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .roadmap-canvas-container {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .roadmap-legend {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .roadmap-canvas-container {
+    height: 50vh;
+    min-height: 350px;
+  }
+}
+
 /* Carbon fiber background pattern */
 .roadmap-bg-carbon {
   background-image: repeating-linear-gradient(

@@ -93,16 +93,19 @@ export default function ProgressLine({ progress = 0 }) {
   const glowMatRef = useRef();
   const curve = useMemo(() => buildTrackCurve(), []);
 
-  // Inner bright plasma core (slightly thinner for a sharper lightning look)
+  // Inner bright plasma core (slightly thinner for a sharper lightning look).
+  // Empty deps: build once. With 500 segs x 12 radial, rebuild cost = ~6,600 verts.
   const brightGeometry = useMemo(
     () => createGeometryWithT(curve, 0.25, 500, 12),
-    [curve]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
-  // Outer electric aura
+  // Outer electric aura. Empty deps: 300 x 10 = ~3,000 verts built once.
   const glowGeometry = useMemo(
     () => createGeometryWithT(curve, 0.9, 300, 10),
-    [curve]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   // Animate uniforms

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -28,10 +28,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Cache the reversed section-id list ONCE so we don't re-allocate and
+  // mutate the array on every scroll event. With 6 sections, the original
+  // code did 6 getBoundingClientRect() calls + an array reverse per scroll.
+  const reversedSectionIds = useMemo(
+    () => NAV_LINKS.map(link => link.href.replace("#", "")).reverse(),
+    []
+  );
+
   useEffect(() => {
     const handleActiveSection = () => {
-      const sections = NAV_LINKS.map(link => link.href.replace("#", ""));
-      for (const section of sections.reverse()) {
+      for (const section of reversedSectionIds) {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
@@ -44,7 +51,7 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleActiveSection, { passive: true });
     return () => window.removeEventListener("scroll", handleActiveSection);
-  }, []);
+  }, [reversedSectionIds]);
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
@@ -127,23 +134,26 @@ export default function Navbar() {
                     />
                   )}
                   
-                  <span className="relative z-10 flex">
-                    {link.label.split("").map((char, i) => (
-                      <motion.span
-                        key={i}
-                        className="inline-block"
-                        animate={isHovered ? {
-                          y: [0, -3, 0],
-                          transition: { duration: 0.3, delay: i * 0.02, ease: "easeOut" }
-                        } : {
-                          y: 0,
-                          transition: { duration: 0.2 }
-                        }}
-                      >
-                        {char === " " ? "\u00A0" : char}
-                      </motion.span>
-                    ))}
-                  </span>
+                  {/*
+                    Single motion span over the entire label.
+                    Was: 1 motion component per character (6 nav links x ~9 chars = ~54 components
+                    animating on every hover). Now: 1 component per link, no jank on first hover.
+                    A subtle letter-spacing bump gives a tactile hover feel without the per-char cost.
+                  */}
+                  <motion.span
+                    className="relative z-10 inline-block"
+                    animate={isHovered ? {
+                      y: -2,
+                      letterSpacing: '0.2em',
+                      transition: { duration: 0.2, ease: "easeOut" }
+                    } : {
+                      y: 0,
+                      letterSpacing: '0.15em',
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    {link.label}
+                  </motion.span>
                 </a>
               );
             })}

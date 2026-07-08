@@ -138,6 +138,16 @@ function FSAECar() {
   );
 }
 
+// V1: Shared geometry & material for the 12-particle trail.
+// One BufferGeometry is reused across all meshes instead of allocating 12 copies.
+const TRAIL_GEOMETRY = new THREE.SphereGeometry(0.08, 6, 6);
+const TRAIL_MATERIAL = new THREE.MeshBasicMaterial({
+  color: TEAL,
+  transparent: true,
+  opacity: 0,
+  depthWrite: false,
+});
+
 export default function CarIndicator({ progress = 0 }) {
   const groupRef = useRef();
   const trailRefs = useRef([]);
@@ -174,11 +184,13 @@ export default function CarIndicator({ progress = 0 }) {
       </group>
 
       {/* Teal particle trail — logo colour */}
+      {/* FIX (V1): Share a single unit-sphere BufferGeometry across all 12 trail
+          meshes instead of allocating 12 separate ones. Also: the old code set
+          `args={[1, 6, 6]}` (radius 1) and then scaled down to ~0.14, which is
+          visually correct but wasteful. Now the geometry itself is the visible
+          size — we just scale to fade. */}
       {Array.from({ length: TRAIL_COUNT }).map((_, i) => (
-        <mesh key={i} ref={(el) => (trailRefs.current[i] = el)}>
-          <sphereGeometry args={[1, 6, 6]} />
-          <meshBasicMaterial color={TEAL} transparent opacity={0} depthWrite={false} />
-        </mesh>
+        <mesh key={i} ref={(el) => (trailRefs.current[i] = el)} geometry={TRAIL_GEOMETRY} material={TRAIL_MATERIAL} />
       ))}
     </>
   );

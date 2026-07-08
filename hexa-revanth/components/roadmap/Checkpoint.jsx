@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useMemo, useState } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { Html, Line } from '@react-three/drei';
@@ -7,7 +7,11 @@ import { buildTrackCurve, COLORS } from './trackData';
 
 /**
  * Checkpoint — a single milestone node positioned ON the track curve.
- * States: completed (cyan filled), current (pulsing), locked (dimmed)
+ * States: completed (cyan filled), current (pulsing), locked (dimmed fill only)
+ *
+ * Brightness is now constant across all states (ring + glow are always lit),
+ * only the inner fill communicates progress. Node also scales up on mobile
+ * viewports so checkpoints stay readable/tappable on small screens.
  */
 export default function Checkpoint({
   checkpoint,
@@ -21,9 +25,20 @@ export default function Checkpoint({
   const glowRef = useRef();
   const curve = useMemo(() => buildTrackCurve(), []);
 
-  // Position on the curve
+  // --- Mobile detection: scale the whole node up on small viewports ---
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  const mobileScale = isMobile ? 1.6 : 1;
+
+  // Position on the curve + upward offset for label/connector.
   const position = useMemo(() => {
-    return curve.getPointAt(checkpoint.t);
+    const p = curve.getPointAt(checkpoint.t);
+    return new THREE.Vector3(p.x, p.y, p.z);
   }, [curve, checkpoint.t]);
 
   // Dynamic state based on progress
@@ -36,54 +51,59 @@ export default function Checkpoint({
     if (meshRef.current) {
       if (isCurrent) {
         const pulse = Math.sin(state.clock.elapsedTime * 2.5) * 0.15 + 1.0;
-        meshRef.current.scale.setScalar(pulse);
+        meshRef.current.scale.setScalar(pulse * mobileScale);
       } else if (isHovered) {
         meshRef.current.scale.setScalar(
-          THREE.MathUtils.lerp(meshRef.current.scale.x, 1.3, 0.1)
+          THREE.MathUtils.lerp(meshRef.current.scale.x, 1.3 * mobileScale, 0.1)
         );
       } else {
         meshRef.current.scale.setScalar(
-          THREE.MathUtils.lerp(meshRef.current.scale.x, 1.0, 0.1)
+          THREE.MathUtils.lerp(meshRef.current.scale.x, 1.0 * mobileScale, 0.1)
         );
       }
     }
 
     if (glowRef.current) {
+      // Glow is now always visible (bright at every state), just pulses
+      // harder when current and lifts slightly on hover.
       if (isCurrent) {
-        const glowPulse = Math.sin(state.clock.elapsedTime * 2.5) * 0.3 + 0.5;
+        const glowPulse = Math.sin(state.clock.elapsedTime * 2.5) * 0.3 + 0.6;
         glowRef.current.material.opacity = glowPulse;
         glowRef.current.scale.setScalar(
-          Math.sin(state.clock.elapsedTime * 2.5) * 0.5 + 2.0
+          (Math.sin(state.clock.elapsedTime * 2.5) * 0.5 + 2.0) * mobileScale
         );
-      } else if (isHovered && !isLocked) {
-        glowRef.current.material.opacity = 0.4;
-        glowRef.current.scale.setScalar(2.0);
+      } else if (isHovered) {
+        glowRef.current.material.opacity = 0.55;
+        glowRef.current.scale.setScalar(2.0 * mobileScale);
       } else {
-        glowRef.current.material.opacity = isCompleted ? 0.15 : 0;
-        glowRef.current.scale.setScalar(1.5);
+        // Constant baseline glow for every checkpoint, completed or not.
+        glowRef.current.material.opacity = 0.4;
+        glowRef.current.scale.setScalar(1.8 * mobileScale);
       }
     }
   });
 
-  const nodeColor = isLocked ? COLORS.locked : COLORS.cyan;
-  const nodeOpacity = isLocked ? 0.4 : 1.0;
+  // Ring/node color & brightness no longer dim when locked — only the
+  // inner fill below communicates completion state.
+  const nodeColor = COLORS.cyan;
+  const nodeOpacity = 1.0;
 
   return (
     <group position={[position.x, 0.3, position.z]}>
-      {/* Glow ring */}
+      {/* Glow ring — always lit, not just on completion */}
       <mesh ref={glowRef} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.4, 0.9, 32]} />
         <meshBasicMaterial
           color={COLORS.cyan}
           transparent
-          opacity={0}
+          opacity={0.4}
           side={THREE.DoubleSide}
           depthWrite={false}
         />
       </mesh>
 
       {/* Main node */}
-      <group ref={meshRef}>
+      <group ref={meshRef} scale={mobileScale}>
         {/* Outer ring */}
         <mesh
           rotation={[-Math.PI / 2, 0, 0]}
@@ -105,41 +125,26 @@ export default function Checkpoint({
           <ringGeometry args={[0.25, 0.4, 32]} />
           <meshStandardMaterial
             color={nodeColor}
-            emissive={isLocked ? '#000000' : COLORS.cyan}
-            emissiveIntensity={isLocked ? 0 : 0.5}
+            emissive={COLORS.cyan}
+            emissiveIntensity={0.5}
             transparent
             opacity={nodeOpacity}
             side={THREE.DoubleSide}
           />
         </mesh>
 
-        {/* Inner fill (for completed/current) */}
-        {!isLocked && (
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <circleGeometry args={[0.25, 32]} />
-            <meshStandardMaterial
-              color={COLORS.cyan}
-              emissive={COLORS.cyan}
-              emissiveIntensity={isCurrent ? 0.8 : 0.3}
-              transparent
-              opacity={isCompleted || isCurrent ? 0.9 : 0.3}
-              side={THREE.DoubleSide}
-            />
-          </mesh>
-        )}
-
-        {/* Inner dot for locked */}
-        {isLocked && (
-          <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <circleGeometry args={[0.15, 32]} />
-            <meshStandardMaterial
-              color={COLORS.locked}
-              transparent
-              opacity={0.3}
-              side={THREE.DoubleSide}
-            />
-          </mesh>
-        )}
+        {/* Inner fill — this is what actually shows progress now */}
+        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+          <circleGeometry args={[0.25, 32]} />
+          <meshStandardMaterial
+            color={COLORS.cyan}
+            emissive={COLORS.cyan}
+            emissiveIntensity={isCurrent ? 0.8 : isCompleted ? 0.4 : 0.2}
+            transparent
+            opacity={isCompleted || isCurrent ? 0.9 : 0.45}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
       </group>
 
       {/* Connector Line */}
@@ -169,8 +174,9 @@ export default function Checkpoint({
         <div
           className="roadmap-checkpoint-label"
           style={{
-            opacity: isLocked ? 0.4 : 1,
-            color: isLocked ? '#666' : COLORS.cyan,
+            opacity: 1,
+            color: COLORS.cyan,
+            transform: isMobile ? 'scale(1.3)' : undefined,
           }}
         >
           <span className="roadmap-phase-tag">PHASE {checkpoint.phase}</span>

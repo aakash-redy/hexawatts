@@ -6,12 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CHECKPOINTS, DEFAULT_PROGRESS, COLORS } from './trackData';
 import Tooltip from './Tooltip';
 import ProgressHUD from './ProgressHUD';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+import supabase from '@/lib/supabase';
 
 const TrackCanvas = dynamic(() => import('./TrackCanvas'), {
   ssr: false,
@@ -48,7 +43,12 @@ export default function RoadmapSection() {
           supabase.from('site_settings').select('*').eq('key', 'roadmap_active_checkpoint').single(),
         ]);
 
-        const checkpoints = checkpointsRes.data || [];
+        // FIX (V3): Default missing/empty status to 'locked' so legend class lookups
+        // never break with an undefined `cp.status` when the DB row omits the column.
+        const checkpoints = (checkpointsRes.data || []).map(cp => ({
+          status: 'locked',
+          ...cp,
+        }));
         setDbCheckpoints(checkpoints);
 
         // Set progress to active checkpoint position

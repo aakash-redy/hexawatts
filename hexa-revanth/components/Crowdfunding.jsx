@@ -1,13 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { createClient } from "@supabase/supabase-js";
+import supabase from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 const TOTAL_SEGMENTS = 30;
 
@@ -77,19 +72,29 @@ export default function Crowdfunding() {
   }, []);
 
   useEffect(() => {
+    // Empty deps: subscribe ONCE. The original code had [stats.raised] which
+    // caused a re-subscribe on every database update, churning the channel and
+    // dropping events. Use functional setState to read the previous value.
     const campaignChannel = supabase
       .channel("campaign-live-updates")
       .on("postgres_changes", { event: "UPDATE", schema: "public", table: "campaigns" },
         async (payload) => {
           const newData = payload.new;
-          setPrevRaised(stats.raised);
+          setStats(prev => {
+            setPrevRaised(prev.raised);
+            return {
+              ...prev,
+              targetGoal:  Math.round(newData.goal_amount_paise / 100),
+              raised:      Math.round(newData.total_raised_paise / 100),
+            };
+          });
           const { data: supportersData } = await supabase.from("donations").select("donor_email").eq("campaign_id", newData.id).eq("status", "SUCCESS");
           let supportersCount = 0;
           if (supportersData) {
             const uniqueEmails = new Set(supportersData.map(d => d.donor_email).filter(email => email && email.trim() !== ''));
             supportersCount = uniqueEmails.size;
           }
-          setStats(prev => ({ ...prev, targetGoal: Math.round(newData.goal_amount_paise / 100), raised: Math.round(newData.total_raised_paise / 100), supporters: supportersCount }));
+          setStats(prev => ({ ...prev, supporters: supportersCount }));
           setIsLiveUpdating(true);
           setTimeout(() => setIsLiveUpdating(false), 2000);
         }
@@ -117,7 +122,7 @@ export default function Crowdfunding() {
         supabase.removeChannel(channelRef.current.donationChannel);
       }
     };
-  }, [stats.raised]);
+  }, []);  // Empty deps: subscribe once. Re-subscribing on every raised update would cause channel thrash.
 
   const percentageRaw = stats.targetGoal > 0 ? (stats.raised / stats.targetGoal) * 100 : 0;
   const PERCENTAGE = Math.min(100, Math.max(0, Math.round(percentageRaw)));

@@ -2,14 +2,8 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
-import { createClient } from "@supabase/supabase-js";
+import supabase from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
-
-// ─── SUPABASE SETUP ───────────────────────────────────────────────────────────
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
 
 const AUTO_PLAY_INTERVAL = 3000;
 
@@ -152,11 +146,8 @@ export default function Hero() {
     return (
       <section className="relative h-screen w-full bg-black">
         <div className="absolute inset-0 flex items-center justify-center">
-          <div
-            className="w-10 h-10 rounded-full border border-white/10 border-t-white/50"
-            style={{ animation: 'spin 1s linear infinite' }}
-          />
-          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+          {/* Use Tailwind's built-in animate-spin (spin keyframe is in globals.css) */}
+          <div className="w-10 h-10 rounded-full border border-white/10 border-t-white/50 animate-spin" />
         </div>
       </section>
     );
@@ -290,7 +281,7 @@ export default function Hero() {
                       fill
                       className="object-contain md:object-cover object-center"
                       priority
-                      quality={100}
+                      quality={85}
                       sizes="(max-width: 640px) 90vw, (max-width: 768px) 80vw, (max-width: 1024px) 65vw, 50vw"
                     />
                   </motion.div>

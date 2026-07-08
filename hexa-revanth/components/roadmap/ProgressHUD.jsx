@@ -13,17 +13,24 @@ export default function ProgressHUD({ progress, activeCheckpoint, checkpoints })
   useEffect(() => {
     const target = Math.round(progress * 100);
     let current = displayPercent;
+    let raf;
+    let active = true;
     const step = () => {
+      if (!active) return;
       if (Math.abs(current - target) < 1) {
         setDisplayPercent(target);
         return;
       }
       current += (target - current) * 0.08;
       setDisplayPercent(Math.round(current));
-      requestAnimationFrame(step);
+      raf = requestAnimationFrame(step);
     };
-    requestAnimationFrame(step);
-  }, [progress]);
+    raf = requestAnimationFrame(step);
+    return () => {
+      active = false;
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [progress, displayPercent]);
 
   // Find the active/current phase
   const currentPhase = activeCheckpoint ||
