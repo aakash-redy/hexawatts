@@ -41,8 +41,8 @@ export default function Specs() {
         }}
       />
       
-      <div className="absolute top-20 left-10 w-[400px] h-[400px] bg-[#00C8E0]/8 blur-[150px] rounded-full" />
-      <div className="absolute bottom-20 right-10 w-[400px] h-[400px] bg-[#FFC600]/8 blur-[150px] rounded-full" />
+      <div className="absolute top-20 left-10 w-[400px] h-[400px] bg-[#42AACC]/8 blur-[150px] rounded-full" />
+      <div className="absolute bottom-20 right-10 w-[400px] h-[400px] bg-[#B6B2A5]/8 blur-[150px] rounded-full" />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 relative z-10">
         
@@ -53,8 +53,8 @@ export default function Specs() {
             whileInView={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 bg-black border border-white/[0.08] px-4 py-2 rounded-full mb-8"
           >
-            <span className="text-[10px] font-mono text-[#00C8E0] tracking-[0.3em]">SYS:SPECS_LOADED</span>
-            <span className="w-1.5 h-1.5 bg-[#00C8E0] rounded-full animate-pulse" />
+            <span className="text-[10px] font-mono text-[#42AACC] tracking-[0.3em]">SYS:SPECS_LOADED</span>
+            <span className="w-1.5 h-1.5 bg-[#42AACC] rounded-full animate-pulse" />
           </motion.div>
 
           <motion.h2
@@ -83,7 +83,7 @@ export default function Specs() {
         {loading && (
           <div className="text-center py-12">
             <div className="inline-flex items-center gap-2 bg-black border border-white/[0.08] px-4 py-2 rounded-full">
-              <span className="w-1.5 h-1.5 bg-[#FFC600] rounded-full animate-pulse" />
+              <span className="w-1.5 h-1.5 bg-[#B6B2A5] rounded-full animate-pulse" />
               <span className="text-white/40 text-[10px] font-bold tracking-[0.3em] uppercase">Loading Specifications...</span>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function Specs() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {allSpecs.map((spec, index) => {
               const isActive = activePart === spec.name;
-              const accentColor = spec.category === 'mechanical' ? '#FFC600' : '#00C8E0';
+              const accentColor = spec.category === 'mechanical' ? '#B6B2A5' : '#42AACC';
               
               return (
                 <motion.div
@@ -126,8 +126,8 @@ export default function Specs() {
                       <div className="flex items-center justify-between mb-5">
                         <span className={`text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-1 rounded-md ${
                           spec.category === 'mechanical' 
-                            ? 'bg-[#FFC600]/10 text-[#FFC600]' 
-                            : 'bg-[#00C8E0]/10 text-[#00C8E0]'
+                            ? 'bg-[#B6B2A5]/10 text-[#B6B2A5]' 
+                            : 'bg-[#42AACC]/10 text-[#42AACC]'
                         }`}>
                           {spec.category}
                         </span>

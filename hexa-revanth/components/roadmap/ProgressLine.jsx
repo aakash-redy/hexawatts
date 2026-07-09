@@ -126,13 +126,13 @@ export default function ProgressLine({ progress = 0 }) {
   // Hardcoded to Hexawatts Lightning Blue
   const brightUniforms = useMemo(() => ({
     uProgress: { value: 0 },
-    uColor: { value: new THREE.Color('#00C8E0') }, 
+    uColor: { value: new THREE.Color('#42AACC') }, 
     uTime: { value: 0 },
   }), []);
 
   const glowUniforms = useMemo(() => ({
     uProgress: { value: 0 },
-    uColor: { value: new THREE.Color('#00C8E0') },
+    uColor: { value: new THREE.Color('#42AACC') },
     uTime: { value: 0 },
   }), []);
 

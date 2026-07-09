@@ -25,7 +25,7 @@ export default function PageLoader({ isLoading }) {
           <motion.div
             animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
             transition={{ duration: 3, repeat: Infinity }}
-            className="absolute w-[400px] h-[400px] bg-[#00C8E0]/10 blur-[100px] rounded-full"
+            className="absolute w-[400px] h-[400px] bg-[#42AACC]/10 blur-[100px] rounded-full"
           />
 
           {/* Panther Logo */}
@@ -40,7 +40,7 @@ export default function PageLoader({ isLoading }) {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="absolute inset-0 bg-gradient-to-r from-[#FFC600]/30 via-[#00C8E0]/30 to-[#FFC600]/30 blur-[50px] rounded-full scale-150"
+              className="absolute inset-0 bg-gradient-to-r from-[#B6B2A5]/30 via-[#42AACC]/30 to-[#B6B2A5]/30 blur-[50px] rounded-full scale-150"
             />
 
             <Image
@@ -63,7 +63,7 @@ export default function PageLoader({ isLoading }) {
             <h1 className="text-3xl md:text-4xl font-black text-white tracking-tighter">
               HEXAWATTS
             </h1>
-            <p className="text-[#FFC600] text-xs tracking-[0.3em] uppercase mt-2">
+            <p className="text-[#B6B2A5] text-xs tracking-[0.3em] uppercase mt-2">
               Racing Team
             </p>
             
@@ -74,7 +74,7 @@ export default function PageLoader({ isLoading }) {
                   key={i}
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
-                  className="w-1.5 h-1.5 bg-[#00C8E0] rounded-full"
+                  className="w-1.5 h-1.5 bg-[#42AACC] rounded-full"
                 />
               ))}
             </div>
@@ -85,7 +85,7 @@ export default function PageLoader({ isLoading }) {
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 2, ease: "easeInOut" }}
-            className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#FFC600] via-[#00C8E0] to-[#FFC600] origin-left"
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#B6B2A5] via-[#42AACC] to-[#B6B2A5] origin-left"
           />
         </motion.div>
       )}

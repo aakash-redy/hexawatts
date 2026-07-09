@@ -9,16 +9,16 @@ module.exports = {
     extend: {
       colors: {
         /* --- PRIMARY: Racing Yellow — unchanged, core brand --- */
-        "primary":                    "#FFC600",
+        "primary":                    "#B6B2A5",
         "on-primary":                 "#1A1300",
         "primary-container":          "#F5C518",
         "on-primary-container":       "#332700",
         "primary-fixed":              "#FFD64D",
-        "primary-fixed-dim":          "#FFC600",
+        "primary-fixed-dim":          "#B6B2A5",
         "on-primary-fixed":           "#1A1300",
         "on-primary-fixed-variant":   "#4D3B00",
         "inverse-primary":            "#CC9E00",
-        "surface-tint":               "#FFC600",
+        "surface-tint":               "#B6B2A5",
 
         /* --- BACKGROUND & SURFACES --- */
         "background":                 "#E8EDF5",

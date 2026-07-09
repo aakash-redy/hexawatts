@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* Logo + Brand - Click to refresh */}
           <Link href="/" className="flex items-center gap-3 group cursor-pointer">
             <div className="relative">
-              <div className="absolute inset-0 bg-[#00C8E0]/20 blur-xl rounded-full scale-150 group-hover:bg-[#00C8E0]/40 transition-all duration-500" />
+              <div className="absolute inset-0 bg-[#42AACC]/20 blur-xl rounded-full scale-150 group-hover:bg-[#42AACC]/40 transition-all duration-500" />
               <Image
                 src="/images/logo.png"
                 alt="HEXAWATTS RACING TEAM LOGO"
@@ -89,7 +89,7 @@ export default function Navbar() {
               <span className="text-sm md:text-base font-black italic tracking-tighter text-white font-grotesk leading-none">
                 JNTU Hexawatts Racing Team
               </span>
-              <span className="text-[8px] md:text-[9px] font-bold tracking-[0.2em] text-[#00C8E0]/60 uppercase leading-none mt-0.5">
+              <span className="text-[8px] md:text-[9px] font-bold tracking-[0.2em] text-[#42AACC]/60 uppercase leading-none mt-0.5">
                 Where Power Meets Geometry
               </span>
               <span className="text-[7px] md:text-[8px] font-medium tracking-[0.15em] text-white/30 uppercase leading-none mt-0.5">
@@ -114,14 +114,14 @@ export default function Navbar() {
                   onMouseLeave={() => setHoveredLink(null)}
                   className={`relative px-4 py-2 font-grotesk text-xs tracking-[0.15em] uppercase transition-colors duration-300 rounded-lg ${
                     isActive 
-                      ? "text-[#00C8E0]" 
-                      : "text-white/50 hover:text-[#00C8E0]"
+                      ? "text-[#42AACC]" 
+                      : "text-white/50 hover:text-[#42AACC]"
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="activeNavBg"
-                      className="absolute inset-0 rounded-lg bg-[#00C8E0]/10"
+                      className="absolute inset-0 rounded-lg bg-[#42AACC]/10"
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     />
                   )}
@@ -129,7 +129,7 @@ export default function Navbar() {
                   {isActive && (
                     <motion.span
                       layoutId="activeNav"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-[#00C8E0] rounded-full shadow-[0_0_10px_rgba(0,200,224,0.6)]"
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-[#42AACC] rounded-full shadow-[0_0_10px_rgba(0,200,224,0.6)]"
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                     />
                   )}
@@ -163,7 +163,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <motion.button
               whileTap={{ scale: 0.9 }}
-              className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/70 hover:text-[#00C8E0] hover:border-[#00C8E0]/30 transition-all duration-300"
+              className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-full bg-white/[0.03] border border-white/[0.08] text-white/70 hover:text-[#42AACC] hover:border-[#42AACC]/30 transition-all duration-300"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -204,7 +204,7 @@ export default function Navbar() {
                     transition={{ delay: index * 0.05 }}
                     className={`w-full text-center py-3 font-grotesk text-sm tracking-[0.2em] uppercase transition-all duration-300 rounded-lg ${
                       isActive 
-                        ? "text-[#00C8E0] bg-[#00C8E0]/5 border border-[#00C8E0]/20" 
+                        ? "text-[#42AACC] bg-[#42AACC]/5 border border-[#42AACC]/20" 
                         : "text-white/50 hover:text-white hover:bg-white/[0.03] border border-transparent"
                     }`}
                   >
@@ -217,7 +217,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00C8E0]/30 to-transparent opacity-50" />
+      <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#42AACC]/30 to-transparent opacity-50" />
     </header>
   );
 }

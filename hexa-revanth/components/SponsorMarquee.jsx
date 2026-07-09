@@ -15,7 +15,7 @@ export default function SponsorMarquee({ sponsors, title, direction = "left", sp
     <div className="relative w-full py-6">
       {/* Section Label */}
       <div className="text-center mb-6">
-        <span className="text-[#FFC600] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
+        <span className="text-[#B6B2A5] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
           {title}
         </span>
       </div>

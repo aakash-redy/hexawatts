@@ -4,9 +4,9 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { buildTrackCurve } from './trackData';
 
-const GOLD       = '#FFC600';
+const GOLD       = '#B6B2A5';
 const GOLD_DARK  = '#CC9E00';
-const TEAL       = '#00C8E0'; // exact logo teal
+const TEAL       = '#42AACC'; // exact logo teal
 const WHITE      = '#ffffff';
 const CARBON     = '#1a1a1a';
 

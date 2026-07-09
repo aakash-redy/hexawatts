@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import supabase from '@/lib/supabase';
 
-export const TEAL    = '#00C8E0';
+export const TEAL    = '#42AACC';
 export const NAVY    = '#0D1A3A';
 export const NAVY_EL = '#1E3A6E';
-export const YELLOW  = '#D9B24C'; // muted gold instead of neon #FFC600
+export const YELLOW  = '#D9B24C'; // muted gold instead of neon #B6B2A5
 
 const PLACEHOLDER_SVG = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%231E3A6E'/><stop offset='100%25' style='stop-color:%230D1A3A'/></linearGradient></defs><rect width='100' height='100' fill='url(%23g)'/><circle cx='50' cy='38' r='18' fill='%23FFFFFF18'/><ellipse cx='50' cy='82' rx='28' ry='20' fill='%23FFFFFF10'/></svg>`;
 

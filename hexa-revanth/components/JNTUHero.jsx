@@ -52,7 +52,7 @@ export default function JNTUHero() {
           <div className="p-8 md:p-12 text-center md:text-left">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white uppercase tracking-tight leading-[1.2] mb-6">
               Proudly Representing{" "}
-              <span className="text-[#00C8E0] italic drop-shadow-[0_0_15px_rgba(0,200,224,0.4)]">
+              <span className="text-[#42AACC] italic drop-shadow-[0_0_15px_rgba(0,200,224,0.4)]">
                 JNTU HYDERABAD
               </span>
             </h2>
@@ -74,7 +74,7 @@ export default function JNTUHero() {
               href="https://jntuh.ac.in/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#00C8E0]/60 hover:text-[#00C8E0] text-xs font-bold tracking-[0.2em] uppercase transition-colors duration-300 group"
+              className="inline-flex items-center gap-2 text-[#42AACC]/60 hover:text-[#42AACC] text-xs font-bold tracking-[0.2em] uppercase transition-colors duration-300 group"
             >
               <span>Visit the College</span>
               <svg 

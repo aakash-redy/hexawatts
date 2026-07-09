@@ -115,7 +115,7 @@ export const START_FINISH_T = 0.0;
 
 // Updated to gold palette — cyan removed
 export const COLORS = {
-  gold: '#FFC600',
+  gold: '#B6B2A5',
   goldRGB: [1.0, 0.776, 0.0],
   goldGlow: 'rgba(255, 198, 0, 0.25)',
   trackBase: '#111111',
@@ -124,7 +124,7 @@ export const COLORS = {
   locked: '#333333',
   lockedDim: '#1a1a1a',
   // Keep cyan alias so any other component referencing COLORS.cyan doesn't break
-  cyan: '#FFC600',
+  cyan: '#B6B2A5',
   cyanRGB: [1.0, 0.776, 0.0],
   cyanGlow: 'rgba(255, 198, 0, 0.25)',
 };

@@ -53,7 +53,7 @@ export default function Footer() {
               <span className="text-sm md:text-base font-black italic tracking-tighter text-white font-grotesk leading-none">
                 JNTU HEXAWATTS
               </span>
-              <span className="text-[8px] md:text-[9px] font-bold tracking-[0.2em] text-[#00C8E0]/60 uppercase leading-none mt-0.5">
+              <span className="text-[8px] md:text-[9px] font-bold tracking-[0.2em] text-[#42AACC]/60 uppercase leading-none mt-0.5">
                 Racing Team
               </span>
             </div>
@@ -93,7 +93,7 @@ export default function Footer() {
 
         {/* Center: Team Leadership Contact - Clean text style */}
         <div className="flex flex-col items-center gap-5">
-          <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#FFC600]">
+          <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#B6B2A5]">
             Team Leadership
           </p>
           
@@ -101,7 +101,7 @@ export default function Footer() {
             {captain && (
               <div>
                 <p className="text-white/80 text-sm font-medium">
-                  <span className="text-[#FFC600]/60 text-[10px] font-bold uppercase tracking-wider block mb-0.5">
+                  <span className="text-[#B6B2A5]/60 text-[10px] font-bold uppercase tracking-wider block mb-0.5">
                     {captain.role || 'Team Captain'}
                   </span>
                   {captain.name || 'TBA'}
@@ -109,7 +109,7 @@ export default function Footer() {
                 {captain.number && (
                   <a
                     href={`tel:${captain.number?.replace(/\s/g, '')}`}
-                    className="text-[#00C8E0]/50 text-xs hover:text-[#00C8E0] transition-colors mt-1 block"
+                    className="text-[#42AACC]/50 text-xs hover:text-[#42AACC] transition-colors mt-1 block"
                   >
                     {captain.number}
                   </a>
@@ -120,7 +120,7 @@ export default function Footer() {
             {viceCaptain && (
               <div>
                 <p className="text-white/80 text-sm font-medium">
-                  <span className="text-[#00C8E0]/60 text-[10px] font-bold uppercase tracking-wider block mb-0.5">
+                  <span className="text-[#42AACC]/60 text-[10px] font-bold uppercase tracking-wider block mb-0.5">
                     {viceCaptain.role || 'Vice Captain'}
                   </span>
                   {viceCaptain.name || 'TBA'}
@@ -128,7 +128,7 @@ export default function Footer() {
                 {viceCaptain.number && (
                   <a
                     href={`tel:${viceCaptain.number?.replace(/\s/g, '')}`}
-                    className="text-[#00C8E0]/50 text-xs hover:text-[#00C8E0] transition-colors mt-1 block"
+                    className="text-[#42AACC]/50 text-xs hover:text-[#42AACC] transition-colors mt-1 block"
                   >
                     {viceCaptain.number}
                   </a>
@@ -140,7 +140,7 @@ export default function Footer() {
 
         {/* Right: Quick Links */}
         <div className="flex flex-col items-center md:items-end gap-6">
-          <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#00C8E0]">
+          <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#42AACC]">
             Quick Links
           </p>
           
@@ -154,7 +154,7 @@ export default function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-[11px] text-white/40 hover:text-[#00C8E0] transition-colors tracking-wider uppercase"
+                className="text-[11px] text-white/40 hover:text-[#42AACC] transition-colors tracking-wider uppercase"
               >
                 {link.label}
               </a>

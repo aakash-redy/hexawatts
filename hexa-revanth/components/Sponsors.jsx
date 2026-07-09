@@ -15,7 +15,7 @@ function SponsorMarquee({ sponsors, title, direction = "left", speed = "normal" 
     <div className="relative w-full py-4">
       {/* Section Label */}
       <div className="text-center mb-4">
-        <span className="text-[#FFC600] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
+        <span className="text-[#B6B2A5] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
           {title}
         </span>
       </div>
@@ -105,7 +105,7 @@ export default function Sponsors() {
       <section className="py-16 md:py-24 px-6 md:px-8 max-w-[1440px] mx-auto relative" id="sponsors">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 bg-white/[0.02] border border-white/[0.06] px-4 py-2 rounded-full">
-            <span className="w-1.5 h-1.5 bg-[#FFC600] rounded-full animate-pulse" />
+            <span className="w-1.5 h-1.5 bg-[#B6B2A5] rounded-full animate-pulse" />
             <span className="text-white/40 text-[10px] font-bold tracking-[0.3em] uppercase">
               Loading Sponsors...
             </span>
@@ -118,22 +118,22 @@ export default function Sponsors() {
   return (
     <section className="py-20 md:py-28 relative overflow-hidden" id="sponsors">
       {/* Background atmosphere */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#FFC600]/3 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#00C8E0]/3 blur-[130px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#B6B2A5]/3 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#42AACC]/3 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-3 bg-white/[0.02] backdrop-blur-xl border border-white/[0.06] px-5 py-2 rounded-full mb-6">
-            <span className="w-2 h-2 bg-[#FFC600] rounded-full animate-pulse shadow-[0_0_8px_rgba(255,198,0,0.8)]" />
-            <span className="text-[#FFC600] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
+            <span className="w-2 h-2 bg-[#B6B2A5] rounded-full animate-pulse shadow-[0_0_8px_rgba(255,198,0,0.8)]" />
+            <span className="text-[#B6B2A5] text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
               Our Partners
             </span>
           </div>
 
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-[0.95]">
             POWERED{" "}
-            <span className="text-[#FFC600] italic drop-shadow-[0_0_20px_rgba(255,198,0,0.4)]">
+            <span className="text-[#B6B2A5] italic drop-shadow-[0_0_20px_rgba(255,198,0,0.4)]">
               BY
             </span>
           </h2>

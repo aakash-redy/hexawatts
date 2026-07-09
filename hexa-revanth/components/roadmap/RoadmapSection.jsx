@@ -90,7 +90,7 @@ export default function RoadmapSection() {
       >
         <span className="roadmap-header-tag">HEXAWATTS R&D PIPELINE</span>
         <h2 className="roadmap-header-title">
-          ROAD TO <span className="text-primary">PODIUM 2025</span>
+          ROAD TO <span className="text-primary">PODIUM 2027</span>
         </h2>
         <p className="roadmap-header-subtitle">
           From the workshops of CIET to the Kari Motor Speedway. Follow the evolution of our next-gen platform.
