@@ -1,0 +1,81 @@
+# .clineignore - Files and directories Cline should NEVER read or reveal
+# This prevents accidental exposure of API keys, secrets, and credentials.
+
+# Environment files (API keys, secrets, DB credentials)
+.env
+.env.*
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.staging
+.env.test
+
+# Secret/credential files
+*.key
+*.pem
+*.p12
+*.pfx
+*.cer
+*.crt
+*.keystore
+secrets/
+secrets.json
+secrets.yaml
+secrets.yml
+credentials/
+credentials.json
+credentials.yaml
+credentials.yml
+
+# API keys and tokens
+api-keys.json
+api-keys.yaml
+api-keys.yml
+tokens.json
+tokens.yaml
+
+# Service account & auth files
+service-account*.json
+*-credentials.json
+gcp-key*.json
+firebase-adminsdk*.json
+aws-credentials
+.aws/
+.gcp/
+.firebase/
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+dump.sql
+database.sql
+
+# Config files that often contain secrets
+config.local.json
+config.local.yaml
+config.local.yml
+config.secrets.json
+app.config.ts
+app.config.js
+
+# Private SSH/GPG keys
+id_rsa
+id_rsa.pub
+id_dsa
+id_ed25519
+*.gpg
+
+# IDE/editor configs that may contain tokens
+.vscode/settings.json
+.idea/workspace.xml
+
+# Vercel/Netlify/Railway deployment configs with secrets
+.vercel/
+.netlify/
+
+# Lock files (not sensitive but large/noisy - optional, uncomment if desired)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
