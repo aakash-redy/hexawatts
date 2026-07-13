@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd hexa && npm install && next build",
-  "devCommand": "cd hexa && npm install && next dev",
-  "installCommand": "cd hexa && npm install",
+  "buildCommand": "cd hexawatts && npm install && next build",
+  "devCommand": "cd hexawatts && npm install && next dev",
+  "installCommand": "cd hexawatts && npm install",
   "framework": "nextjs",
-  "outputDirectory": "hexa/.next"
+  "outputDirectory": "hexawatts/.next"
 }
