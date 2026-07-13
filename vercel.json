@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "cd hexa-revanth && npm install && next build",
-  "devCommand": "cd hexa-revanth && npm install && next dev",
-  "installCommand": "cd hexa-revanth && npm install",
+  "buildCommand": "cd hexa && npm install && next build",
+  "devCommand": "cd hexa && npm install && next dev",
+  "installCommand": "cd hexa && npm install",
   "framework": "nextjs",
-  "outputDirectory": "hexa-revanth/.next"
+  "outputDirectory": "hexa/.next"
 }
