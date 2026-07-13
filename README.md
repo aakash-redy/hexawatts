@@ -54,7 +54,7 @@ The app expects the following tables to exist in your Supabase project:
 - `captains` — team captain / vice-captain
 - `domains` — team domain rows
 - `team_leads` — domain lead rows
-- `team_members` — domain member rows
+- `members` — domain member rows
 - `mentors` — mentor rows
 - `mechanical_specs` — mechanical car spec cards
 - `electrical_specs` — electrical car spec cards
